@@ -1,6 +1,6 @@
 # TestNGSelendroid
 
-This repo is a starter `Appium` QA framework to automate tests for both `Android` and `iOS` Mashreq Bank application. 
+This repo is a starter `Appium` QA framework to automate tests for both `Android` and `iOS` Selendroid application. 
 This guide will help you setup and run the testing environment.
 
 # Getting Started
@@ -42,13 +42,14 @@ Then open the cloned repo with `IntelliJ`, the project will build and download a
 -   Start `Appium` Server.
 -   For `Android`, launch an emulator with API Level 26 or higher. For `iOS`, the simulator will launch automatically once you run the tests.
 -   Open `com.selendroid.TestSuite.java` and press ^R or right click and press `Run 'Test'`   
+
 **To run the tests from Maven command line:**
 
 -   From the terminal, navigate to the project root directory
 -   Run the following:
 
 ```bash
-mvn test -Dplatform.name=<platform_name> -Dapp.path=<app_path> 
+mvn test -Dplatform.name=<platform_name> -Dapp.path=<app_path>
 ```
 -   `platform.name` should be either `Android` or `iOS`
 -   `app.path` should be e.g. `/Users/some path/selendroid-test-app.apk`
