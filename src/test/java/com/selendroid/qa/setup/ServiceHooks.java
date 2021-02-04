@@ -2,22 +2,56 @@ package com.selendroid.qa.setup;
 
 
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+import com.selendroid.qa.reporting.ExtentManager;
+import com.selendroid.qa.reporting.ExtentTestManager;
 import lombok.extern.log4j.Log4j2;
-import org.testng.annotations.BeforeClass;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.annotations.*;
 
-import java.io.File;
+import static com.selendroid.qa.appium.DriverWrapper.quitDriver;
+
 
 @Log4j2
-public class ServiceHooks {
+public class ServiceHooks implements ITestListener {
 
-    static ExtentTest test;
-    static ExtentReports report;
+    public void onStart(ITestContext context) {
+        ExtentManager.getInstance();
+        log.info("*** Test Suite " + context.getName() + " started ***");
+    }
 
-    @BeforeClass
-    public static void startTest() {
+    public void onFinish(ITestContext context) {
+        log.info("*** Test Suite " + context.getName() + " ending ***");
+        ExtentManager.getInstance().flush();
+    }
 
+    public void onFinishTest(ITestContext context) {
+        log.info("*** Test Case " + context.getName() + " ending ***");
+        quitDriver();
+    }
+
+    @BeforeSuite
+    public void beforeSuite(ITestContext context) {
+        log.info("*** Test Suite " + context.getName() + " started ***");
+        ExtentManager.getInstance();
+    }
+
+    @BeforeTest
+    public void beforeTest(ITestContext context) {
+        log.info("*** Test " + context.getName() + " started ***");
+        ExtentTestManager.startTest(context.getName());
+    }
+
+    @AfterTest
+    public void afterTest(ITestContext context) {
+        log.info("*** Test " + context.getName() + " ending ***");
+        ExtentTestManager.endTest();
+    }
+
+    @AfterSuite
+    public void afterSuite(ITestContext context) {
+        log.info("*** Test Suite " + context.getName() + " ending ***");
+        ExtentManager.getInstance().flush();
     }
 
 }

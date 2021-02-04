@@ -3,6 +3,7 @@ package com.selendroid.qa.components;
 import com.selendroid.qa.appium.DriverWrapper;
 import com.selendroid.qa.enums.PlatformType;
 import com.selendroid.qa.exception.FrameworkException;
+import com.selendroid.qa.reporting.ExtentManager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;

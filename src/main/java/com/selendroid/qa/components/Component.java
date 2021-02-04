@@ -1,5 +1,6 @@
 package com.selendroid.qa.components;
 
+import com.aventstack.extentreports.Status;
 import com.selendroid.qa.enums.VerifyType;
 import com.selendroid.qa.utils.TestUtil;
 import com.selendroid.qa.utils.WaitUtil;
@@ -103,39 +104,39 @@ public class Component<T extends WebElement> {
      * @param expected - the expected value
      * @return
      */
-    public Component<T> verify(VerifyType type, String expected) {
-
+    public boolean verify(VerifyType type, String expected) {
+        boolean result = false;
         try {
             WaitUtil.waitForElementToBeVisible(element, driver);
             if (element.isDisplayed()) {
 
                 switch(type) {
                     case DISPLAYED:
-                        Assert.assertEquals(element.getAttribute("displayed"), expected);
+                        result = assertEquals(element.getAttribute("displayed"), expected);
                         break;
                     case PASSWORD:
-                        Assert.assertEquals(element.getAttribute("password"), expected);
+                        result = assertEquals(element.getAttribute("password"), expected);
                         break;
                     case TYPE:
-                        Assert.assertEquals(element.getAttribute("type"), expected);
+                        result = assertEquals(element.getAttribute("type"), expected);
                         break;
                     case VISIBLE:
-                        Assert.assertEquals(element.getAttribute("visible"), expected);
+                        result = assertEquals(element.getAttribute("visible"), expected);
                         break;
                     case VALUE:
-                        Assert.assertEquals(element.getAttribute("value"), expected);
+                        result = assertEquals(element.getAttribute("value"), expected);
                         break;
                     case CHECKED:
-                        Assert.assertEquals(element.getAttribute("checked"), expected);
+                        result = assertEquals(element.getAttribute("checked"), expected);
                         break;
                     case ENABLED:
-                        Assert.assertEquals(element.isEnabled(), Boolean.getBoolean(expected));
+                        result = assertEquals(element.isEnabled(), Boolean.getBoolean(expected));
                         break;
                     case TEXT:
-                        Assert.assertEquals(element.getText(), expected);
+                        result = assertEquals(element.getText(), expected);
                         break;
                     case TAG:
-                        Assert.assertEquals(element.getTagName(), expected);
+                        result = assertEquals(element.getTagName(), expected);
                         break;
                     default:
                         break;
@@ -145,11 +146,21 @@ public class Component<T extends WebElement> {
             } else {
                 TestUtil.failWithScreenshot(driver);
             }
+
         } catch (NoSuchElementException e) {
             TestUtil.failWithScreenshot(e, driver);
         }
-        return this;
+        return result;
     }
+
+    private boolean assertEquals(String actual, String expected) {
+        return actual.equals(expected);
+    }
+
+    private boolean assertEquals(boolean actual, boolean expected) {
+        return actual == expected;
+    }
+
 
     /**
      * Check if this element is displayed without verification

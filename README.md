@@ -54,6 +54,11 @@ mvn test -Dplatform.name=<platform_name> -Dapp.path=<app_path>
 -   `platform.name` should be either `Android` or `iOS`
 -   `app.path` should be e.g. `/Users/some path/selendroid-test-app.apk`
 
+### Test Report
+
+Once the test suite is run, a report similar to below will be available withing the root directory in TestReport folder
+![Screenshot](TestReport.png)
+
 # Major Libraries / Tools
 
 | Category                           | Library/Tool      | Link                                                          |
