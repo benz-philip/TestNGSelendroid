@@ -41,7 +41,7 @@ Then open the cloned repo with `IntelliJ`, the project will build and download a
 -   Update application.properties with the path to the app files (note, these changes shouldn't be committed)
 -   Start `Appium` Server.
 -   For `Android`, launch an emulator with API Level 26 or higher. For `iOS`, the simulator will launch automatically once you run the tests.
--   Open `com.selendroid.TestSuite.java` and press ^R or right click and press `Run 'Test'`   
+-   Open `testng.xml` and press ^R or right click and press `Run 'Test'`   
 
 **To run the tests from Maven command line:**
 
